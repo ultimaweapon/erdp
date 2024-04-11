@@ -1,0 +1,19 @@
+name: CI
+on:
+  pull_request:
+    branches:
+    - main
+  push:
+    branches:
+    - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+    - name: Check Rust styles
+      run: cargo fmt --check
+    - name: Lint
+      run: cargo clippy -- -D warnings
