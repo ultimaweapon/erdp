@@ -7,3 +7,6 @@ repository = "https://github.com/ultimaweapon/erdp"
 edition = "2021"
 
 [dependencies]
+
+[dev-dependencies]
+thiserror = "1.0.58"

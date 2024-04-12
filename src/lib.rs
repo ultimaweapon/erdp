@@ -35,3 +35,33 @@ impl<'a> std::fmt::Display for Display<'a> {
         Ok(())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use thiserror::Error;
+
+    #[test]
+    fn single() {
+        let e = TestError::Single;
+
+        assert_eq!(e.display().to_string(), "an error without nested errors");
+    }
+
+    #[test]
+    fn nested() {
+        let e = std::io::Error::from(std::io::ErrorKind::NotFound);
+        let e = TestError::Nested(e);
+
+        assert_eq!(e.display().to_string(), "nested error -> entity not found");
+    }
+
+    #[derive(Debug, Error)]
+    enum TestError {
+        #[error("an error without nested errors")]
+        Single,
+
+        #[error("nested error")]
+        Nested(#[source] std::io::Error),
+    }
+}
