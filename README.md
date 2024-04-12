@@ -1,4 +1,5 @@
 # ERDP
+[![Crates.io Version](https://img.shields.io/crates/v/erdp)](https://crates.io/crates/erdp)
 
 ERDP is a very small Rust crate to help with error displaying. If you use `std::fmt::Display` to display a `std::error::Error` like the following code:
 
