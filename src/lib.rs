@@ -15,6 +15,12 @@ impl<T: Error> ErrorDisplay for T {
     }
 }
 
+impl ErrorDisplay for dyn Error {
+    fn display(&self) -> Display {
+        Display(self)
+    }
+}
+
 /// Implementation of [`std::fmt::Display`] for display an error and its nested errors.
 pub struct Display<'a>(&'a dyn Error);
 
@@ -54,6 +60,13 @@ mod tests {
         let e = TestError::Nested(e);
 
         assert_eq!(e.display().to_string(), "nested error -> entity not found");
+    }
+
+    #[test]
+    fn trait_object() {
+        let e: Box<dyn Error> = Box::new(TestError::Single);
+
+        assert_eq!(e.display().to_string(), "an error without nested errors");
     }
 
     #[derive(Debug, Error)]
