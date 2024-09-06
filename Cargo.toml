@@ -1,10 +1,11 @@
 [package]
 name = "erdp"
 description = "Crate for display an error and its nested errors"
-version = "0.1.1"
+version = "0.2.0"
 license = "MIT"
 repository = "https://github.com/ultimaweapon/erdp"
 edition = "2021"
+rust-version = "1.81"
 
 [dependencies]
 
