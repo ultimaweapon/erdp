@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout source
       uses: actions/checkout@v4
+    - name: Update Rust
+      run: rustup update stable
     - name: Check Rust styles
       run: cargo fmt --check
     - name: Lint
