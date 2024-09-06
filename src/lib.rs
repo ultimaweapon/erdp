@@ -1,5 +1,7 @@
-use std::error::Error;
-use std::fmt::Formatter;
+#![no_std]
+
+use core::error::Error;
+use core::fmt::Formatter;
 
 /// Provides a method to get a [`Display`].
 ///
@@ -24,17 +26,17 @@ impl ErrorDisplay for dyn Error {
 /// Implementation of [`std::fmt::Display`] for display an error and its nested errors.
 pub struct Display<'a>(&'a dyn Error);
 
-impl<'a> std::fmt::Display for Display<'a> {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+impl<'a> core::fmt::Display for Display<'a> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
         // Write top-level error.
-        std::fmt::Display::fmt(self.0, f)?;
+        core::fmt::Display::fmt(self.0, f)?;
 
         // Write nested errors.
         let mut next = self.0.source();
 
         while let Some(e) = next {
             f.write_str(" -> ")?;
-            std::fmt::Display::fmt(e, f)?;
+            core::fmt::Display::fmt(e, f)?;
             next = e.source();
         }
 
@@ -45,7 +47,10 @@ impl<'a> std::fmt::Display for Display<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::prelude::rust_2021::*;
     use thiserror::Error;
+
+    extern crate std;
 
     #[test]
     fn single() {
