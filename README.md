@@ -52,9 +52,10 @@ Then the output will change to something like:
 Failed to load config.json: couldn't open the specified file -> No such file or directory.
 ```
 
-## Breaking changes in 0.3
+## Breaking changes in 0.2
 
-ERDP now depend on `alloc` crate.
+- ERDP now depend on `alloc` crate.
+- Rust minimum version now 1.85.
 
 ## License
 
