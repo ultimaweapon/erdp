@@ -4,10 +4,10 @@ description = "Crate for display an error and its nested errors"
 version = "0.2.0"
 license = "MIT"
 repository = "https://github.com/ultimaweapon/erdp"
-edition = "2021"
-rust-version = "1.81"
+edition = "2024"
+rust-version = "1.85"
 
 [dependencies]
 
 [dev-dependencies]
-thiserror = "1.0.58"
+thiserror = "2.0.17"

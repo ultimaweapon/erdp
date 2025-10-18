@@ -8,17 +8,17 @@ use core::fmt::Formatter;
 /// This trait is automatically implemented for any type that implement [`std::error::Error`].
 pub trait ErrorDisplay {
     /// Returns a [`Display`] to display the current error and its nested errors.
-    fn display(&self) -> Display;
+    fn display(&self) -> Display<'_>;
 }
 
 impl<T: Error> ErrorDisplay for T {
-    fn display(&self) -> Display {
+    fn display(&self) -> Display<'_> {
         Display(self)
     }
 }
 
 impl ErrorDisplay for dyn Error {
-    fn display(&self) -> Display {
+    fn display(&self) -> Display<'_> {
         Display(self)
     }
 }
