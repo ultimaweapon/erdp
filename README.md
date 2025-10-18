@@ -1,7 +1,7 @@
 # ERDP
 [![Crates.io Version](https://img.shields.io/crates/v/erdp)](https://crates.io/crates/erdp)
 
-ERDP is a very small Rust crate to help with error displaying. If you use `std::fmt::Display` to display a `std::error::Error` like the following code:
+ERDP is a small Rust crate with zero dependencies to help you display an error. If you use `std::fmt::Display` to display a `std::error::Error` like the following code:
 
 ```rust
 use std::fs::File;
@@ -51,6 +51,10 @@ Then the output will change to something like:
 ```
 Failed to load config.json: couldn't open the specified file -> No such file or directory.
 ```
+
+## Breaking changes in 0.3
+
+ERDP now depend on `alloc` crate.
 
 ## License
 

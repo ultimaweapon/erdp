@@ -1,29 +1,38 @@
+//! Small crate with zero dependencies to help you display an error.
 #![no_std]
+
+pub use self::wrapper::*;
 
 use core::error::Error;
 use core::fmt::Formatter;
 
-/// Provides a method to get a [`Display`].
+extern crate alloc;
+
+mod wrapper;
+
+/// Provides a method to get a [Display].
 ///
-/// This trait is automatically implemented for any type that implement [`std::error::Error`].
+/// This trait is automatically implemented for any type that implement [core::error::Error].
 pub trait ErrorDisplay {
-    /// Returns a [`Display`] to display the current error and its nested errors.
+    /// Returns a [Display] to display current error and its nested errors.
     fn display(&self) -> Display<'_>;
 }
 
 impl<T: Error> ErrorDisplay for T {
+    #[inline(always)]
     fn display(&self) -> Display<'_> {
         Display(self)
     }
 }
 
 impl ErrorDisplay for dyn Error {
+    #[inline(always)]
     fn display(&self) -> Display<'_> {
         Display(self)
     }
 }
 
-/// Implementation of [`std::fmt::Display`] for display an error and its nested errors.
+/// Implementation of [core::fmt::Display] to display an error and its nested errors.
 pub struct Display<'a>(&'a dyn Error);
 
 impl<'a> core::fmt::Display for Display<'a> {
@@ -47,7 +56,7 @@ impl<'a> core::fmt::Display for Display<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::prelude::rust_2021::*;
+    use std::prelude::rust_2024::*;
     use thiserror::Error;
 
     extern crate std;
