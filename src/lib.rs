@@ -32,6 +32,13 @@ impl ErrorDisplay for dyn Error {
     }
 }
 
+impl ErrorDisplay for dyn Error + Send + Sync {
+    #[inline(always)]
+    fn display(&self) -> Display<'_> {
+        Display(self)
+    }
+}
+
 /// Implementation of [core::fmt::Display] to display an error and its nested errors.
 pub struct Display<'a>(&'a dyn Error);
 
